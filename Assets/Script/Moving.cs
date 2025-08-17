@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 public class Moving : MonoBehaviour
 {
     Rigidbody2D body; // переменная для хранения тела персонажа
     public float speed; // переменная скорости
+    public float jump; // переменная прыжка
     float axis; // переменная для хранения состояния Оси
     Vector3 size; // переменная для хранения размера персонажа
     bool noAir = true; // Переменная, которая определяет в воздухе персонаж или нет
@@ -25,17 +27,12 @@ public class Moving : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")//Проверяем, прекратили ли мы столкновение с землей
         {
+            noAir = false; // Если прекратили, переключаем на ложь (мы не на земле!)
         }
-        noAir = false; // Если прекратили, переключаем на ложь (мы не на земле!)
     }
     void Update()
     {
-        axis = Input.GetAxis("Horizontal"); // получаем состояние Оси 
-        // перемещение вправо/влево
-        if (Input.GetButton("Horizontal"))
-        {
-            body.velocity = new Vector2(axis * speed, body.velocity.y);
-        }
+        axis = Input.GetAxisRaw("Horizontal"); // получаем состояние Оси 
         // если идем вправо, поворачиваем персонажа вправо
         if (axis > 0)
         {
@@ -47,9 +44,16 @@ public class Moving : MonoBehaviour
             gameObject.transform.localScale = new Vector3(-size.x, size.y, size.z);
         }
         // прыжок
-        if (Input.GetButtonDown("Jump") && noAir) // Проверка: на земле ли мы
+        if (Input.GetButton("Jump") && noAir) // Проверка: на земле ли мы
         {
-            body.AddForce(new Vector2(0, speed / 1.0f), ForceMode2D.Impulse);
+            body.AddForce(new Vector2(0, jump), ForceMode2D.Impulse);
         }
     }
+    private void FixedUpdate()
+    {
+        // перемещение вправо/влево
+        Input.GetButton("Horizontal");
+        body.velocity = new Vector2(axis * speed, body.velocity.y);
+    }
 }
+

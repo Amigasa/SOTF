@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public class Anim : MonoBehaviour
 {
     Rigidbody2D body; // переменная для хранения тела персонажа
@@ -11,6 +12,7 @@ public class Anim : MonoBehaviour
 
     bool isJump;
     bool RunnP;
+    bool isRunning;
     public Animator animator;
     void Start()
     {
@@ -22,21 +24,15 @@ public class Anim : MonoBehaviour
     void Update()
     {
         axis = Input.GetAxisRaw("Horizontal"); // получаем состояние Оси 
-        if(gameObject.transform.localScale.x > 0 && axis < 0)
-        {
-            RunnP = true;
-            animator.SetBool("RunP", RunnP);
-        }
-        if (gameObject.transform.localScale.x < 0 && axis > 0)
-        {
-            RunnP = true;
-            animator.SetBool("RunP", RunnP);
-        }
         // прыжок
         if (Input.GetButtonDown("Jump") && isJump == false)
         {
             isJump = true;
             animator.SetBool("Jumpp", isJump);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -47,12 +43,26 @@ public class Anim : MonoBehaviour
             animator.SetBool("Jumpp", isJump);
         }
     }
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        // перемещение вправо/влево
-        if (Input.GetButton("Horizontal"))
+        if (gameObject.transform.localScale.x > 0 && axis < 0)
         {
-
+            RunnP = true;
+            animator.SetBool("RunP", RunnP);
+        }
+        else if (gameObject.transform.localScale.x < 0 && axis > 0)
+        {
+            RunnP = true;
+            animator.SetBool("RunP", RunnP);
+        }
+        else if (Input.GetButton("Horizontal"))
+        {
+            animator.SetFloat("Speed", 1f);
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0f);
+            RunnP = false;
         }
     }
 }

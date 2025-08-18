@@ -44,7 +44,7 @@ public class Moving : MonoBehaviour
             gameObject.transform.localScale = new Vector3(-size.x, size.y, size.z);
         }
         // прыжок
-        if (Input.GetButton("Jump") && noAir) // Проверка: на земле ли мы
+        if (Input.GetButtonDown("Jump") && noAir) // Проверка: на земле ли мы
         {
             body.AddForce(new Vector2(0, jump), ForceMode2D.Impulse);
         }

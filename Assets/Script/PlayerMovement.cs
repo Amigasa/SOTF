@@ -498,6 +498,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isMovingRight != IsFacingRight)
             Turn();
+            
     }
 
     private bool CanJump()

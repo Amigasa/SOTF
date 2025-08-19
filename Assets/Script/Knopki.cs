@@ -7,6 +7,15 @@ public class Knopki : MonoBehaviour
 {
     [SerializeField] private GameObject WinPanel;
     [SerializeField] private GameObject NaPanel;
+    bool AAA;
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            NaPanel.SetActive(!AAA);
+            AAA = !AAA;
+        }
+    }
     public void Nastr()
     {
         WinPanel.SetActive(false);

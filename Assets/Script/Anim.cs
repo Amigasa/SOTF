@@ -13,13 +13,11 @@ public class Anim : MonoBehaviour
 
     bool isJump;
     public Animator animator;
-    bool AAA;
     void Start()
     {
         body = GetComponent<Rigidbody2D>(); // получаем тело
         size = gameObject.transform.localScale; // получаем размер
         isJump = false;
-        AAA = false;
     }
     void Update()
     {
@@ -29,11 +27,6 @@ public class Anim : MonoBehaviour
         {
             isJump = true;
             animator.SetBool("Jumpp", isJump);
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            NaPanel.SetActive(!AAA);
-            AAA = !AAA;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

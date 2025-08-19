@@ -9,17 +9,17 @@ public class Anim : MonoBehaviour
     Rigidbody2D body; // переменная для хранения тела персонажа
     float axis; // переменная для хранения состояния Оси
     Vector3 size; // переменная для хранения размера персонажа
+    [SerializeField] private GameObject NaPanel;
 
     bool isJump;
-    bool RunnP;
-    bool isRunning;
     public Animator animator;
+    bool AAA;
     void Start()
     {
         body = GetComponent<Rigidbody2D>(); // получаем тело
         size = gameObject.transform.localScale; // получаем размер
         isJump = false;
-        RunnP = false;
+        AAA = false;
     }
     void Update()
     {
@@ -32,7 +32,8 @@ public class Anim : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(0);
+            NaPanel.SetActive(!AAA);
+            AAA = !AAA;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -45,24 +46,13 @@ public class Anim : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (gameObject.transform.localScale.x > 0 && axis < 0)
-        {
-            RunnP = true;
-            animator.SetBool("RunP", RunnP);
-        }
-        else if (gameObject.transform.localScale.x < 0 && axis > 0)
-        {
-            RunnP = true;
-            animator.SetBool("RunP", RunnP);
-        }
-        else if (Input.GetButton("Horizontal"))
+        if (Input.GetButton("Horizontal"))
         {
             animator.SetFloat("Speed", 1f);
         }
         else
         {
             animator.SetFloat("Speed", 0f);
-            RunnP = false;
         }
     }
 }

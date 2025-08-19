@@ -1,19 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class Knopki : MonoBehaviour
 {
     [SerializeField] private GameObject WinPanel;
     [SerializeField] private GameObject NaPanel;
+
+    private bool isPaused = false;
     bool AAA;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            NaPanel.SetActive(!AAA);
-            AAA = !AAA;
+            if (isPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
         }
     }
     public void Nastr()
@@ -29,6 +39,8 @@ public class Knopki : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene(1);
+        isPaused = false;
+        Time.timeScale = 1f;
     }
     public void Exit()
     {
@@ -37,5 +49,20 @@ public class Knopki : MonoBehaviour
     public void Menu()
     {
         SceneManager.LoadScene(0);
+    }
+    public void Resume()
+    {
+        NaPanel.SetActive(!AAA);
+        AAA = !AAA;
+        Time.timeScale = 1f;
+        isPaused = false;
+    }
+
+    void Pause()
+    {
+        NaPanel.SetActive(!AAA);
+        AAA = !AAA;
+        Time.timeScale = 0f;
+        isPaused = true;
     }
 }

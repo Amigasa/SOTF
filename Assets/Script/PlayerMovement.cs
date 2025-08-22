@@ -165,6 +165,7 @@ public class PlayerMovement : MonoBehaviour
                 _isJumpCut = false;
                 _isJumpFalling = false;
                 Jump();
+                
 
             }
             //Прыжок от стены
@@ -179,6 +180,7 @@ public class PlayerMovement : MonoBehaviour
                 _lastWallJumpDir = (LastOnWallRightTime > 0) ? -1 : 1;
 
                 WallJump(_lastWallJumpDir);
+                
             }
         }
         #endregion
@@ -268,6 +270,7 @@ public class PlayerMovement : MonoBehaviour
                 Run(Data.wallJumpRunLerp);
             else
                 Run(1);
+            
         }
         else if (_isDashAttacking)
         {

@@ -13,18 +13,29 @@ public class PlayerAttack : MonoBehaviour
     public float attackRange;
     public int damage;
     public Animator anim;
+    bool attack;
+
+    private void Start()
+    {
+        attack = false;
+    }
+    public void Attack()
+    {
+        attack = false;
+    }
 
     private void Update()
     {
         if(timeBtwAttack <= 0)
         {
-            if(Input.GetMouseButton(0))
+            if(Input.GetKey(KeyCode.Mouse0))
             {
-                anim.SetTrigger("attack");
+                attack = true;
+                anim.SetBool("attack", attack);
                 Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemy);
                 for(int i = 0; i < enemies.Length; i++)
                 {
-                    
+                    enemies[i].GetComponent<Enemy>().TakeDamage(damage);
                 }
             }
             timeBtwAttack = startTimeBtwAttack;

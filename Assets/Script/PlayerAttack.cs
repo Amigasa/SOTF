@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttack : Sounds
 {
     //перезарядка
     private float timeBtwAttack;
@@ -33,7 +33,8 @@ public class PlayerAttack : MonoBehaviour
                 attack = true;
                 anim.SetBool("attack", attack);
                 Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemy);
-                for(int i = 0; i < enemies.Length; i++)
+                PlaySound(sounds[0]);
+                for (int i = 0; i < enemies.Length; i++)
                 {
                     enemies[i].GetComponent<Enemy>().TakeDamage(damage);
                 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class HudHP : MonoBehaviour
+public class HudHP : Sounds
 {
     [SerializeField] private GameObject HP;
     [SerializeField] private GameObject HP2;
@@ -27,16 +27,19 @@ public class HudHP : MonoBehaviour
             {
                 HP3.SetActive(false);
                 Hp3.SetActive(true);
+                PlaySound(sounds[0]);
             }
             else if (hp == 2)
             {
                 HP2.SetActive(false);
                 Hp2.SetActive(true);
+                PlaySound(sounds[0]);
             }
             else if (hp == 1)
             {
                 HP.SetActive(false);
                 Hp.SetActive(true);
+                PlaySound(sounds[0]);
                 SceneManager.LoadScene(1);
             }
             hp--;

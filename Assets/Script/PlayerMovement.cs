@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Sounds
 {
     //Параметры игрока с помощью скрипта PlayerData
     public PlayerData Data;
@@ -67,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         RB = GetComponent<Rigidbody2D>();
+
     }
 
     private void Start()
@@ -165,8 +166,7 @@ public class PlayerMovement : MonoBehaviour
                 _isJumpCut = false;
                 _isJumpFalling = false;
                 Jump();
-                
-
+                PlaySound(sounds[1]);
             }
             //Прыжок от стены
             else if (CanWallJump() && LastPressedJumpTime > 0)
@@ -180,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
                 _lastWallJumpDir = (LastOnWallRightTime > 0) ? -1 : 1;
 
                 WallJump(_lastWallJumpDir);
-                
+                PlaySound(sounds[1]);
             }
         }
         #endregion
@@ -270,13 +270,12 @@ public class PlayerMovement : MonoBehaviour
                 Run(Data.wallJumpRunLerp);
             else
                 Run(1);
-            
         }
         else if (_isDashAttacking)
         {
             Run(Data.dashEndRunLerp);
         }
-
+        
         //Скольжение по стене
         if (IsSliding)
             Slide();
@@ -387,6 +386,7 @@ public class PlayerMovement : MonoBehaviour
         //Гарантирует, что мы не сможем сделать прыжок несколько раз одним нажатием
         LastPressedJumpTime = 0;
         LastOnGroundTime = 0;
+
 
         #region Выполнить прыжок
         //Мы увеличиваем силу, прилагаемую при падении
@@ -501,7 +501,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isMovingRight != IsFacingRight)
             Turn();
-            
+
     }
 
     private bool CanJump()

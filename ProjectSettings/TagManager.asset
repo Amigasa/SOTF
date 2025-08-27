@@ -8,6 +8,8 @@ TagManager:
   - WinPanel
   - NaPanel
   - Enemy
+  - L
+  - R
   layers:
   - Default
   - TransparentFX

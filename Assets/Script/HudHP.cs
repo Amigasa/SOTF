@@ -13,6 +13,9 @@ public class HudHP : Sounds
     [SerializeField] private GameObject Hp;
     [SerializeField] private GameObject Hp2;
     [SerializeField] private GameObject Hp3;
+    [SerializeField] private GameObject LosePanel;
+    private bool isPaused = false;
+    bool AAA;
     bool Un = false;
     int hp = 3;
     void UnSec()
@@ -40,11 +43,33 @@ public class HudHP : Sounds
                 HP.SetActive(false);
                 Hp.SetActive(true);
                 PlaySound(sounds[0]);
-                SceneManager.LoadScene(1);
+                if (isPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
             }
             hp--;
             Un = true;
             Invoke("UnSec", 0.5f);
         }
+    }
+    public void Resume()
+    {
+        LosePanel.SetActive(!AAA);
+        AAA = !AAA;
+        Time.timeScale = 1f;
+        isPaused = false;
+    }
+
+    void Pause()
+    {
+        LosePanel.SetActive(!AAA);
+        AAA = !AAA;
+        Time.timeScale = 0f;
+        isPaused = true;
     }
 }

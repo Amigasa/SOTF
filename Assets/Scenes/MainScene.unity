@@ -1954,7 +1954,7 @@ GameObject:
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2011,10 +2011,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b96878d923e354eb782a0c08161195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - {fileID: 8300000, guid: 8018c0a699b9f954ebb7073433a2f2c7, type: 3}
-  - {fileID: 8300000, guid: 1b044d7c633d5ce4ea253779e6789dcb, type: 3}
-  - {fileID: 8300000, guid: 607fe50741c326d4eb415bde90c44756, type: 3}
   Data: {fileID: 11400000, guid: 0f82c4c5f6df7cf4e93874e5634d5c8e, type: 2}
   _groundCheckPoint: {fileID: 981549499}
   _groundCheckSize: {x: 0.49, y: 0.03}
@@ -2236,6 +2232,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f497c57adbd93342b9146ad255cd752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sounds:
+  - {fileID: 8300000, guid: 1b044d7c633d5ce4ea253779e6789dcb, type: 3}
+  - {fileID: 8300000, guid: 8018c0a699b9f954ebb7073433a2f2c7, type: 3}
   NaPanel: {fileID: 644160355}
   animator: {fileID: 1096029858}
 --- !u!114 &1096029860
@@ -2272,7 +2271,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - {fileID: 8300000, guid: c8f0b59ae4976cd48a5d0324a2d0f608, type: 3}
-  startTimeBtwAttack: 0.5
   attackPos: {fileID: 1265851026}
   enemy:
     serializedVersion: 2
@@ -2666,7 +2664,7 @@ GameObject:
   m_Layer: 0
   m_Name: a
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2697,7 +2695,7 @@ GameObject:
   m_Layer: 0
   m_Name: d
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

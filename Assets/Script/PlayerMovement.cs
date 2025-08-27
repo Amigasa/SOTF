@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerMovement : Sounds
+public class PlayerMovement : MonoBehaviour
 {
     //Параметры игрока с помощью скрипта PlayerData
     public PlayerData Data;
@@ -166,7 +166,6 @@ public class PlayerMovement : Sounds
                 _isJumpCut = false;
                 _isJumpFalling = false;
                 Jump();
-                PlaySound(sounds[1]);
             }
             //Прыжок от стены
             else if (CanWallJump() && LastPressedJumpTime > 0)
@@ -180,7 +179,6 @@ public class PlayerMovement : Sounds
                 _lastWallJumpDir = (LastOnWallRightTime > 0) ? -1 : 1;
 
                 WallJump(_lastWallJumpDir);
-                PlaySound(sounds[1]);
             }
         }
         #endregion

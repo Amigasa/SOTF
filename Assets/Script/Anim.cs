@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class Anim : MonoBehaviour
+public class Anim : Sound
 {
     Rigidbody2D body; // переменная для хранения тела персонажа
     float axis; // переменная для хранения состояния Оси
@@ -35,6 +35,7 @@ public class Anim : MonoBehaviour
         {
             isJump = false;
             animator.SetBool("Jumpp", isJump);
+            PlaySound(sounds[0]);
         }
     }
     void FixedUpdate()

@@ -23,7 +23,7 @@ public class PlayerAttack : Sounds
     {
         anim.SetTrigger("attack");//сама анимация атаки
     }
-    public void OnAttack()
+    public void OnAttack()//эта функция создана для ивента который мы добавляли на определенный кадр атаки
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemy);//находит всех врагов в радиусе атаки с помощью Physics2D.OverlapCircle
         for (int i = 0; i < enemies.Length; i++)//цикл

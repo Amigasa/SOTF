@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class CameraC : MonoBehaviour
 {
-    public Transform target;
+    public Transform target;//ќбъект за которым будет следовать камера
 
-    public float minX, maxX;
-    public float minY, maxY;
+    public float minX, maxX;//ћаксимальное и минимальное положение камеры по горизонтали
+    public float minY, maxY;//ћаксимальное и минимальное положение камеры по вектикали
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = new Vector3(Mathf.Clamp(target.position.x, minX, maxX), Mathf.Clamp(target.position.y, minY, maxY), transform.position.z);
+        transform.position = new Vector3(Mathf.Clamp(target.position.x, minX, maxX), Mathf.Clamp(target.position.y, minY, maxY), transform.position.z); //функци€ котора€ останавливает камеру в максимальных и минимальных положени€х
     }
 }

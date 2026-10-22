@@ -30,7 +30,7 @@ public class PlayerAttack : Sounds
 
         for (int i = 0; i < enemies.Length; i++)//цикл
         {
-            // ИСПРАВЛЕНО: ищем новый EnemyController вместо старого Enemy
+            // Ищем новый EnemyController вместо старого Enemy
             EnemyController enemyScript = enemies[i].GetComponent<EnemyController>();
 
             // Если скрипт найден, наносим урон

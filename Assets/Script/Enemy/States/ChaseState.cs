@@ -6,27 +6,28 @@ public class ChaseState : EnemyStateBase
 
     public override void Enter()
     {
-        enemy.IsDangerous = true; // В погоне враг опасен
+        enemy.IsDangerous = true; // В погоне враг опасен 0_0 и агрессивен)
     }
 
     public override void Tick()
     {
-        if (enemy.Sensor.PlayerLost())
+        if (enemy.Sensor.PlayerLost()) // Если игрок далеко возвращем в патруль
         {
             machine.ChangeState(enemy.PatrolState);
             return;
         }
 
-        if (enemy.Sensor.PlayerInAttackRange())
+        if (enemy.Sensor.PlayerInAttackRange()) // Если близко: В АТАКУУУ
             machine.ChangeState(enemy.AttackState);
     }
 
-    public override void PhysicsTick()
+    public override void PhysicsTick() // Проверяем, есть ли игрок
     {
         if (enemy.Sensor.Player == null) return;
 
-        float dir = Mathf.Sign(enemy.Sensor.Player.position.x - enemy.transform.position.x);
-        enemy.Body.velocity = new Vector2(dir * enemy.Data.chaseSpeed, enemy.Body.velocity.y);
-        enemy.FaceDirection((int)dir);
+        // Берем координату X игрока, вычитаем координату X врага.
+        float dir = Mathf.Sign(enemy.Sensor.Player.position.x - enemy.transform.position.x); // Mathf.Sign превращает это число в 1 (если игрок справа) или -1 (если слева).
+        enemy.Body.velocity = new Vector2(dir * enemy.Data.chaseSpeed, enemy.Body.velocity.y); // Затем умножаем на скорость погони и применяем к Rigidbody2D.
+        enemy.FaceDirection((int)dir); // Вызов метода для переворота спрайта врага
     }
 }

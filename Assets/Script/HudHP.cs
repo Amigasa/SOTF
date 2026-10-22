@@ -28,32 +28,32 @@ public class HudHP : Sounds
     // Вызывается из EnemyController (когда враг атакует)
     public void ApplyDamage(int dmg)
     {
-        if (Un) return;//Если игрок неуязвим, пропускаем
+        if (Un) return;// Если игрок неуязвим, пропускаем
 
-        if (hp == 3)
+        if (hp == 3) // Если хп равно 3 то есть полное
         {
-            HP3.SetActive(false);
-            Hp3.SetActive(true);
-            PlaySound(sounds[0]);
+            HP3.SetActive(false); // Отключается отображение живого гриба
+            Hp3.SetActive(true); // Включается отображение погибшего гриба
+            PlaySound(sounds[0]); // Звук получения урона
         }
-        else if (hp == 2)
+        else if (hp == 2) // Если хп равно 2
         {
-            HP2.SetActive(false);
-            Hp2.SetActive(true);
-            PlaySound(sounds[0]);
+            HP2.SetActive(false); // Отключается отображение живого гриба
+            Hp2.SetActive(true); // Включается отображение погибшего гриба
+            PlaySound(sounds[0]); // Звук получения урона
         }
-        else if (hp == 1)
+        else if (hp == 1) // Если хп равно 1
         {
-            HP.SetActive(false);
-            Hp.SetActive(true);
-            PlaySound(sounds[0]);
+            HP.SetActive(false); // Отключается отображение живого гриба
+            Hp.SetActive(true); // Включается отображение погибшего гриба
+            PlaySound(sounds[0]); // Звук получения урона
 
-            if (isPaused) Resume(); else Pause();
+            if (isPaused) Resume(); else Pause(); // Если пауза true игра продолжается, иначе пауза
         }
 
-        hp--;
-        Un = true;
-        Invoke("UnSec", 0.5f);
+        hp--; // Хп отнимается для понимания сколько хп у игрока
+        Un = true; // Включается неуязвимость
+        Invoke("UnSec", 0.5f); // Выключаем неуязвимость через 0.5 секунды
     }
 
     // Вызывается физически при столкновении (для урона от касания)
@@ -69,19 +69,19 @@ public class HudHP : Sounds
         }
     }
 
-    public void Resume()//Возобновление
+    public void Resume() // Возобновление
     {
-        LosePanel.SetActive(!AAA);
-        AAA = !AAA;
-        Time.timeScale = 1f;
-        isPaused = false;
+        LosePanel.SetActive(!AAA); // Включает/выключает панель проигрыша
+        AAA = !AAA; // Меняет значение на противоположное
+        Time.timeScale = 1f; // Время идет
+        isPaused = false; // Отключает паузу
     }
 
-    void Pause()//Пауза (при проигрыше)
+    void Pause() //Пауза (вызывается при проигрыше)
     {
-        LosePanel.SetActive(!AAA);
-        AAA = !AAA;
-        Time.timeScale = 0f;
-        isPaused = true;
+        LosePanel.SetActive(!AAA); // Включает/выключает панель проигрыша
+        AAA = !AAA; // Меняет значение на противоположное
+        Time.timeScale = 0f; // Время останавливается, игра ставится на паузу
+        isPaused = true; // Включает паузу
     }
 }

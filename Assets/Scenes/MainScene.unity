@@ -2974,6 +2974,7 @@ GameObject:
   - component: {fileID: 1392825134}
   - component: {fileID: 1392825135}
   - component: {fileID: 1392825136}
+  - component: {fileID: 1392825137}
   m_Layer: 3
   m_Name: Grib
   m_TagString: Enemy
@@ -3069,7 +3070,7 @@ Transform:
   m_GameObject: {fileID: 1392825130}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.45, y: -6.22, z: 0}
+  m_LocalPosition: {x: 9.88, y: -6.22, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3138,9 +3139,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613f9a145f4ccb64498809d495f52696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Anim: {fileID: 1392825137}
   Data: {fileID: 11400000, guid: aa0053cd1b2482440a974bf677bfc082, type: 2}
   Sensor: {fileID: 1392825135}
   health: 3
+--- !u!95 &1392825137
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392825130}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf8ad985ed5b1d7499ade0db4f0ceaff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1443887729
 GameObject:
   m_ObjectHideFlags: 0
@@ -4427,7 +4450,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.25, y: -0.49996948}
+  m_AnchoredPosition: {x: -0.25, y: -0.49995422}
   m_SizeDelta: {x: 0.50012, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1893597291

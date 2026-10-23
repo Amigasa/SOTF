@@ -1,27 +1,28 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))] // Для удобства, если повесить скрипт на пустой объект, сразу создаст ригитбади
+[RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour
 {
+    [Header("Анимации")]
+    public Animator Anim;
+
     [Header("Данные и Сенсор")]
     public EnemyData Data;
     public EnemySensor Sensor;
 
     public Rigidbody2D Body { get; private set; }
     public StateMachine Machine { get; private set; }
-
-    // Опасен ли враг прямо сейчас
     public bool IsDangerous { get; set; } = false;
 
-    public PatrolState PatrolState { get; private set; }
-    public ChaseState ChaseState { get; private set; }
-    public AttackState AttackState { get; private set; }
+    // --- ИЗМЕНЕНО ДЛЯ HFSM ---
+    // Теперь мы храним только корневые состояния
+    public AliveState AliveState { get; private set; }
     public DeadState DeadState { get; private set; }
 
     [Header("Здоровье")]
     public int health = 3;
 
-    private void Awake() // До старта игры получаем компоненты
+    private void Awake()
     {
         Body = GetComponent<Rigidbody2D>();
         if (Sensor == null) Sensor = GetComponent<EnemySensor>();
@@ -29,51 +30,61 @@ public class EnemyController : MonoBehaviour
 
         Machine = new StateMachine();
 
-        PatrolState = new PatrolState(this, Machine);
-        ChaseState = new ChaseState(this, Machine);
-        AttackState = new AttackState(this, Machine);
+        // Создаем только корневые состояния
+        AliveState = new AliveState(this, Machine);
         DeadState = new DeadState(this, Machine);
+        Anim = GetComponent<Animator>(); // Анимация
     }
 
-    private void Start() // При старте начинаем с патруля
+    private void Start()
     {
-        Machine.ChangeState(PatrolState);
+        // Стартуем с состояния "Живой"
+        Machine.ChangeState(AliveState);
     }
 
-    private void Update() // Каждый кадр передает команду тик
+    private void Update()
     {
         Machine.Tick();
     }
 
-    private void FixedUpdate() // Для физики
+    private void FixedUpdate()
     {
-        Machine.PhysicsTick(); // Для движения если точнее
+        Machine.PhysicsTick();
     }
 
-    public void FaceDirection(int dir) // Переворачивает спрайт, а то до этого он спиной на игрока нападал)
+    public void FaceDirection(int dir)
     {
         if (dir == 0) return;
         Vector3 s = transform.localScale;
-        s.x = -Mathf.Abs(s.x) * Mathf.Sign(dir); // Возвращает 1 (если идем вправо) или -1 (если влево). Минус перед Mathf.Abs нужен, чтобы спрайт смотрел туда, куда идет.
+        s.x = -Mathf.Abs(s.x) * Mathf.Sign(dir);
         transform.localScale = s;
     }
 
-    public void TakeDamage(int damage) // Отнимает здоровье
+    public void TakeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0) // Если хп 0
+        if (health <= 0)
         {
-            Machine.ChangeState(DeadState); // То смеееертт
+            // В HFSM мы сразу переключаем корневое состояние на Смерть
+            Machine.ChangeState(DeadState);
         }
     }
 
-    public void PerformAttack() // Ищет на игроке скрипт HudHP и вызывает у него ApplyDamage
+    public void PerformAttack()
     {
         if (Sensor.Player == null) return;
         if (Vector2.Distance(transform.position, Sensor.Player.position) <= Data.attackRadius)
         {
             var hp = Sensor.Player.GetComponent<HudHP>();
             if (hp != null) hp.ApplyDamage(Data.attackDamage);
+        }
+    }
+
+    public void PlayDeathAnim()
+    {
+        if (Anim != null)
+        {
+            Anim.SetBool("IsDead", true); // Включаем анимацию смерти
         }
     }
 }

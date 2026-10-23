@@ -15,14 +15,7 @@ public class PatrolState : EnemyStateBase
         {
             direction *= -1;
         }
-    }
-
-    public override void Tick()
-    {
-        // Если увидели игрока — переключаемся на погоню
-        if (enemy.Sensor.PlayerInDetectRange())
-            machine.ChangeState(enemy.ChaseState);
-    }
+    }                                                                                                                                                       
 
     public override void PhysicsTick()
     {
@@ -35,5 +28,6 @@ public class PatrolState : EnemyStateBase
         // Двигаемся в текущем направлении
         enemy.Body.velocity = new Vector2(direction * enemy.Data.patrolSpeed, enemy.Body.velocity.y);
         enemy.FaceDirection(direction);
+        enemy.Anim.SetFloat("Speed", Mathf.Abs(enemy.Body.velocity.x));
     }
 }

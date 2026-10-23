@@ -20,16 +20,11 @@ public class AttackState : EnemyStateBase
             lastAttackTime = Time.time; // Мы бьем и запоминаем время удара
             enemy.PerformAttack(); 
         }
-
-        if (!enemy.Sensor.PlayerInAttackRange()) // И проверяем не убежал ли игрок из радиуса атаки
-            machine.ChangeState(enemy.ChaseState);
-
-        if (enemy.Sensor.PlayerLost()) // И вообще из зоны видимости
-            machine.ChangeState(enemy.PatrolState);
     }
 
     public override void PhysicsTick()
     {
         enemy.Body.velocity = new Vector2(0, enemy.Body.velocity.y); // Просто держим скорость по X равной 0, чтобы враг стоял на месте и не толкал игрока
+        enemy.Anim.SetFloat("Speed", 0f); // Анимация чтобы при атаки останавливался
     }
 }

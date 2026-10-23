@@ -10,6 +10,6 @@ public class CalmState : EnemyCompositeState
     public override void Enter()
     {
         enemy.IsDangerous = false; // В спокойствии враг безопасен
-        ChangeChild(Patrol);       // По умолчанию патрулируем
+        ChangeChild(Patrol); // По умолчанию патрулируем
     }
 }

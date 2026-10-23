@@ -14,7 +14,6 @@ public class EnemyController : MonoBehaviour
     public StateMachine Machine { get; private set; }
     public bool IsDangerous { get; set; } = false;
 
-    // --- ИЗМЕНЕНО ДЛЯ HFSM ---
     // Теперь мы храним только корневые состояния
     public AliveState AliveState { get; private set; }
     public DeadState DeadState { get; private set; }

@@ -15,12 +15,12 @@ public class CombatState : EnemyCompositeState
     public override void Enter()
     {
         enemy.IsDangerous = true; // В бою враг опасен
-        ChangeChild(Chase);       // Всегда начинаем бой с погони
+        ChangeChild(Chase); // Всегда начинаем бой с погони
     }
 
     public override void Tick()
     {
-        // ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ВНУТРИ БОЯ: Погоня <-> Атака
+        // ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ВНУТРИ БОЯ: Погоня Атака
         if (enemy.Sensor.PlayerInAttackRange() && CurrentChild != Attack)
         {
             ChangeChild(Attack);

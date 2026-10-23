@@ -18,7 +18,7 @@ public class AliveState : EnemyCompositeState
 
     public override void Tick()
     {
-        // ВЫСОКОУРОВНЕВАЯ ЛОГИКА: Проверяем условия для смены "ветки"
+        // Проверяем условия для смены "ветки"
         if (enemy.Sensor.PlayerInDetectRange() && CurrentChild != Combat)
         {
             ChangeChild(Combat); // Если увидели игрока — переключаемся на Бой
